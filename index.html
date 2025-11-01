@@ -70,6 +70,12 @@
         color: #291dcc;
     }
 
+    h3 {
+        margin-top: 1rem;
+        margin-bottom: 0.75rem;
+        color: #0e5781;
+    }
+
     p {
         margin-top: 1rem;
         margin-bottom: 0.75rem;
@@ -83,18 +89,85 @@
   <p>
     This GROMACS tutorial details the modeling and analysis of an aqueous zinc 
     sulfate (ZnSO₄) electrolyte system. The tutorial will begin with environment 
-    configuration and will conclude with processing and data analysis, consisting 
+    configuration using Packmol, and will then detail processing and data analysis, consisting 
     of a brief investigation of solvation structures through calculating radial 
     distribution functions (RDFs), and various diffusion coefficients through 
-    computing the mean squared displacement (MSD) of the ionic species.
-  </p>
-  <p>
+    computing the mean squared displacement (MSD) of the ionic species. <br><br>
     This tutorial applies to all GROMACS versions within the 2018.x series.
   </p>
   <p>
-    Inline example:
-    <span class="mono-chip">ZnSO₄ electrolyte</span>
-    <span class="mono-panel">ZnSO₄ electrolyte</span>
+    <b>
+      Modeling the System <span style="float: right;">(<u>Section 1</u>)</span><br>
+      Assigning Force Field Parameters <span style="float: right;">(<u>Section 2</u>)</span><br>
+      Minimizing Energy and Equilibrating <span style="float: right;">(<u>Section 3</u>)</span><br>
+      Running Molecular Dynamics <span style="float: right;">(<u>Section 4</u>)</span><br>
+      Computing Radial Distribution Functions <span style="float: right;">(<u>Section 5</u>)</span><br>
+      Computing Diffusion Coefficients <span style="float: right;">(<u>Section 6</u>)</span><br>
+    </b>
   </p>
+  <h2>Section 1 : Modeling the System</h2>
+  <h3>(1.1) Encoding Molecules</h3>
+  <p>
+    To create a solution using Packmol, the program will require files that detail specifics of each molecule used.
+    In this case, that meas generating files for our solution's <b>Water</b>, <b>Zinc</b>, and <b>Sulfate</b>.
+  </p>
+  <p>First, save <b>Water</b> as <span class="mono-chip">water.pdb</span> with the following specifics:
+    <span class="mono-panel">
+      ATOM      1  OW  SOL     1       0.000   0.000   0.000  1.00  0.00           O
+      ATOM      2  HW1 SOL     1       0.096   0.000   0.000  1.00  0.00           H
+      ATOM      3  HW2 SOL     1      -0.024   0.093   0.000  1.00  0.00           H
+      TER
+      END
+    </span>
+  </p>
+  <p>Then, <b>Zinc</b> as <span class="mono-chip">zn.pdb</span>:
+    <span class="mono-panel">
+      ATOM      1  ZN  ZN2     1       0.000   0.000   0.000  1.00  0.00           Zn
+      TER
+      END
+    </span>
+  </p>
+  <p>And <b>Sulfate</b> as <span class="mono-chip">so4.pdb</span>:
+    <span class="mono-panel">
+      HETATM    1  S   SO4     1       0.000   0.000   0.000  1.00  0.00           S
+      HETATM    2  O1  SO4     1       1.430   0.000   0.000  1.00  0.00           O
+      HETATM    3  O2  SO4     1      -0.477   1.365   0.000  1.00  0.00           O
+      HETATM    4  O3  SO4     1      -0.477  -0.682   1.181  1.00  0.00           O
+      HETATM    5  O4  SO4     1      -0.477  -0.682  -1.181  1.00  0.00           O
+      TER
+      END
+    </span>
+  </p>
+  <h3>(1.2) Create & Generate Using Packmol</h3>
+  <p>Save the <b>Packmol Input File</b> as <span class="mono-chip">packmol.inp</span>:
+    <span class="mono-panel">
+      tolerance 2.0
+      filetype pdb
+      output system_raw.pdb
+
+      # box dimensions in Å (4 nm = 40 Å)
+      add_box_sides 0.0
+
+      structure water.pdb
+        number 4000
+        inside box 0. 0. 0. 40. 40. 40.
+      end structure
+
+      structure so4.pdb
+        number 58
+        inside box 0. 0. 0. 40. 40. 40.
+      end structure
+
+      structure zn.pdb
+        number 58
+        inside box 0. 0. 0. 40. 40. 40.
+      end structure
+    </span>
+  </p>
+  <p>Next, run Packmol in your simulation's main folder: 
+    <span class="mono-panel">packmol < packmol.inp</span>
+    The command will generate <span class="mono-chip">system_raw.pdb</span>, a packed, roughly neutral 1.5M ZnSO<sub>4</sub> (aq) box.
+  </p>
+<div style="height:600px;"></div>
 </body>
 </html>
