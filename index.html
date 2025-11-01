@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GROMACS Electrolytic Solution Tutorial</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 1rem;
+      font-family: Arial, sans-serif;
+      background-color: #c9c9c9;
+      color: #000000;
+      line-height: 1.6;
+    }
+
+    /* Text scaling */
+    @media (max-width: 600px) {
+      body {
+        font-size: 16px;
+      }
+    }
+
+    :root {
+        --mono-bg: #2b2b2b;
+        --mono-fg: #ffffff;
+        --mono-border: #a6a5a5;
+    }
+
+    /* base style (monospace + rounded box) */
+    .mono-chip, .mono-panel {
+        font-family: "SF Mono", SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas,
+                     "Liberation Mono", "Courier New", monospace;
+        color: var(--mono-fg);
+        background: var(--mono-bg);
+        border: 1px solid var(--mono-border);
+        border-radius: 0.3rem;
+        font-size: 80%;
+        padding: 0.15rem 0.55rem;
+    }
+
+    /* inline version (for a word or short phrase) */
+    .mono-chip {
+        display: inline-block;
+        line-height: 1.4;
+    }
+
+    /* block version (for multi-line snippets) */
+    .mono-panel {
+        display: block;
+        margin: 0.8rem 0;
+        white-space: pre-wrap; /* wrap long text */
+        overflow-x: auto;      /* scroll if a line is too long */
+        max-width: 100%;
+    }
+
+    h1, h2, h3, p {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1 {
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    h2 {
+        margin-top: 1rem;
+        margin-bottom: 0.75rem;
+        color: #291dcc;
+    }
+
+    p {
+        margin-top: 1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+  </style>
+</head>
+<body>
+  <h1>GROMACS Electrolytic Solution Tutorial</h1>
+  <h2>Tutorial Overview</h2>
+  <p>
+    This GROMACS tutorial details the modeling and analysis of an aqueous zinc 
+    sulfate (ZnSO₄) electrolyte system. The tutorial will begin with environment 
+    configuration and will conclude with processing and data analysis, consisting 
+    of a brief investigation of solvation structures through calculating radial 
+    distribution functions (RDFs), and various diffusion coefficients through 
+    computing the mean squared displacement (MSD) of the ionic species.
+  </p>
+  <p>
+    This tutorial applies to all GROMACS versions within the 2018.x series.
+  </p>
+  <p>
+    Inline example:
+    <span class="mono-chip">ZnSO₄ electrolyte</span>
+    <span class="mono-panel">ZnSO₄ electrolyte</span>
+  </p>
+</body>
+</html>
